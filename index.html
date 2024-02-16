@@ -1,10 +1,35 @@
 <html>
-    <head>
-        <script src="script.js" defer></script>
-    </head>
-    <body>
-        <h1>Marissa & Cooper Wedding</h1>
-        <img/>
-        <p>This website is currently under construction. please check back soon</p>
-    </body>
+  <head>
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.3.1/decimal.min.js"></script>
+    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id="everything">
+      <div id="top-bar">
+        <div class="ticket-link selected"><img src="detailsticket.png"></div>
+        <div class="ticket-link"><img src="weddingpartyticket.png"></div>
+        <div class="ticket-link"><img src="merchticket.png"></div>
+        <div class="ticket-link"><img src="funinohioticket.png"></div>
+      </div>
+      <!-- <div id="carousel-container">
+        <div id="carousel">
+          <div class="poster">
+            <div></div>
+          </div>
+          <div class="poster selected">
+            <div></div>
+          </div>
+          <div class="poster">
+            <div></div>
+          </div>
+        </div>
+      </div> -->
+      <div id="bottom-bar"></div>
+    </div>
+    <canvas id="myCanvas" style="position: fixed; top: 0; left: 0;"></canvas>
+    <div class="overlay"></div>
+    <button onclick="enter()">Enter</button>
+  </body>
 </html>

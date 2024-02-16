@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
+
+    .spotlight {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: spotlightAnimation 5s linear infinite;
+    }
+
+    @keyframes spotlightAnimation {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(2);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="spotlight"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const spotlight = document.querySelector('.spotlight');
+      const body = document.body;
+
+      function updateSpotlightPosition() {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        const spotlightSize = 100; // Set the size of the spotlight here
+        const randomX = Math.random() * (windowWidth - spotlightSize);
+        const randomY = Math.random() * (windowHeight - spotlightSize);
+
+        spotlight.style.left = randomX + 'px';
+        spotlight.style.top = randomY + 'px';
+      }
+
+      function animateSpotlight() {
+        updateSpotlightPosition();
+        setTimeout(animateSpotlight, 3000); // Change spotlight position every 3 seconds
+      }
+
+      animateSpotlight();
+    });
+  </script>
+</body>
+</html>
