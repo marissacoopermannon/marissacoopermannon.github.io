@@ -61,11 +61,13 @@ body {
 
 .secret {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   background: #ffffff00;
   border: none;
   cursor: default;
+  width: 25vw;
+  height: 10vh;
 }
 
 .opening i {
