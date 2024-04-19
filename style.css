@@ -59,6 +59,15 @@ body {
   font-family: Poppins;
 }
 
+.secret {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #ffffff00;
+  border: none;
+  cursor: default;
+}
+
 .opening i {
   font-size: .9em;
   color: #ffffffee;

@@ -377,3 +377,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function secretEntrance() {
+  if (confirm(`You've discovered the secret entrance! Do you want to enter?`)) {
+    enter();
+  } else {
+    alert("okay");
+  }
+}
