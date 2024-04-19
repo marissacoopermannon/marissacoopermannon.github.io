@@ -244,24 +244,24 @@ function generateSpotlight(c, l) {
 function moveSpotlight(c, spotty) {
   if (spotty.xUp) {
     spotty.xPos += spotty.xSpeed;
-    if (spotty.xPos > c.width) {
+    if (spotty.xPos > c.width - 10) {
       spotty.xUp = false;
     }
   } else {
     spotty.xPos -= spotty.xSpeed;
-    if (spotty.xPos < 0) {
+    if (spotty.xPos < 10) {
       spotty.xUp = true;
     }
   }
 
   if (spotty.yUp) {
     spotty.yPos += spotty.ySpeed;
-    if (spotty.yPos > c.height) {
+    if (spotty.yPos > c.height - 10) {
       spotty.yUp = false;
     }
   } else {
     spotty.yPos -= spotty.ySpeed;
-    if (spotty.yPos < 0) {
+    if (spotty.yPos < 10) {
       spotty.yUp = true;
     }
   }
@@ -315,14 +315,18 @@ function endSpotlights() {
 function enter() {
   let alphaVal = 1;
   const overlay = document.querySelector(".overlay");
-  const buttonEl = document.querySelector("button");
+  const openingEl = document.querySelector(".opening");
+
+  // buttonEl.style.display = "none";
+  // overlay.style.display = "none";
+  // endSpotlights();
 
   warmUpId = setInterval(() => {
     alphaVal -= 0.002;
-    buttonEl.style.opacity = alphaVal;
+    openingEl.style.opacity = alphaVal;
     overlay.style.background = `rgba(0, 0, 0, ${alphaVal})`;
     if (alphaVal <= 0) {
-      buttonEl.style.zIndex = -1;
+      openingEl.style.zIndex = -1;
       sizingUp = true;
       clearTimeout(warmUpId);
     }
@@ -338,4 +342,38 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.style.backgroundSize = "500px";
   document.querySelector("#everything").style.display = "flex";
   startSpotlights(c, ctx);
+
+  const ticketLinks = document.querySelectorAll(".ticket-link");
+
+  for (tl of ticketLinks) {
+    tl.addEventListener("click", e => {
+      const clicked = e.target.parentElement;
+      const pageForLinkId = `#page-${clicked.id.split("ticket-")[1]}`;
+      const pages = document.querySelectorAll(".page");
+
+      for (currentTl of ticketLinks) {
+        currentTl.classList.remove("selected")
+      }
+
+      clicked.classList.add("selected");
+
+      for (page of pages) {
+        if (page.id === pageForLinkId) {
+          page.classList.add("main-selected");
+        } else {
+          page.classList.remove("main-selected");
+        }
+      }
+
+      document.querySelector(`#page-${e.target.parentElement.id.split("ticket-")[1]}`).classList.add("main-selected");
+    });
+  }
+
+  const weddingPartyCards = document.querySelectorAll(".full-card");
+
+  for (card of weddingPartyCards) {
+    card.addEventListener("click", e => {
+      e.target.closest(".full-card").classList.toggle("flipped");
+    });
+  }
 });
