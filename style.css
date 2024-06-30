@@ -6,6 +6,14 @@ html, body {
   height: 100%;
 }
 
+h1, h2 {
+  font-family: "Limelight";
+}
+
+* {
+  font-family: "Poppins";
+}
+
 body {
   background:  black;
 }
@@ -189,8 +197,30 @@ button {
 
 .mid-container > .page.main-selected {
   width: 95%;
-  height: 100%;
+  height: 90%;
   display: inline-block;
+  overflow-y: scroll;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff11;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #22222222;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #22222255;
 }
 
 .spotlight {
@@ -248,4 +278,50 @@ button {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+}
+
+.page > div.box {
+  max-width: 675px;
+  text-align: justify;
+  margin: 0 auto;
+  border: 1px solid black;
+  background: #4F314Cdd;
+  color: white;
+  margin-bottom: 5px;
+  padding: 20px;
+  transition: background 300ms;
+}
+
+.page div.box > h2 {
+  text-align: center;
+}
+
+.page.main-selected {
+  position: relative;
+  overflow-y: auto; /* Ensure this div is scrollable */
+  /*max-height: 500px; /* Example fixed height */
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+.scroll-indicator svg {
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator path {
+  transition: stroke 2s;
+  stroke: "#00000000";
+}
+
+.page div.box a {
+  color: gold;
+  text-decoration: underline;
+}
+
+#page-merch > div.box {
+  padding: 15px;
 }

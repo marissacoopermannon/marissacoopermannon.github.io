@@ -1,33 +1,17 @@
 let sizingUp = false;
+let quickEntry = false;
 
-// function getSpotlightEdgePoints(spotlight) {
-//   const originPoint = spotlight.originPoint;
-//   const cxD = Math.abs(spotlight.xPos - originPoint.xPos);
-//   const cyD = Math.abs(spotlight.yPos - originPoint.yPos);
+const themeColors = [
+  "#005A46",
+  "#4F314C",
+  "#621728",
+  "#1B2138",
+  "#B67432"
+];
 
-//   const lc = Math.sqrt((cxD ** 2) + (cyD ** 2));
-//   const la = Math.sqrt((lc ** 2) - (spotlight.size ** 2));
-
-//   const theta = Math.atan(cyD / cxD);
-//   const beta = Math.atan(spotlight.size / lc);
-
-//   const x1 = la * Math.cos(theta + beta);
-//   const y1 = la * Math.sin(theta + beta);
-
-//   const x2 = la * Math.cos(theta - beta);
-//   const y2 = la * Math.sin(theta - beta);
-
-//   return {
-//     topPoint: {
-//       xPos: originPoint.xPos - (x1 * (originPoint.xPos > spotlight.xPos ? 1 : -1)),
-//       yPos: originPoint.yPos - y1
-//     },
-//     bottomPoint: {
-//       xPos: originPoint.xPos - (x2 * (originPoint.xPos > spotlight.xPos ? 1 : -1)),
-//       yPos: originPoint.yPos - y2
-//     }
-//   }
-// }
+function pickRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 function drawRightSpotlightEdgePoints(spotlight, canvas) {
   const cxD = spotlight.xPos;
@@ -313,7 +297,7 @@ function endSpotlights() {
 }
 
 function enter() {
-  let alphaVal = 1;
+  let alphaVal = quickEntry ? .002 : 1;
   const overlay = document.querySelector(".overlay");
   const openingEl = document.querySelector(".opening");
 
@@ -329,9 +313,14 @@ function enter() {
       openingEl.style.zIndex = -1;
       sizingUp = true;
       clearTimeout(warmUpId);
+      if (quickEntry) {
+        endSpotlights();
+      }
     }
   }, 1);
 }
+
+let currentScrollerTimeout = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const c = document.getElementById("myCanvas");
@@ -347,6 +336,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (tl of ticketLinks) {
     tl.addEventListener("click", e => {
+      clearTimeout(currentScrollerTimeout);
+      scrollIndicator.querySelectorAll("path").forEach(p => {
+        p.style.transition = "0s";
+        p.style.stroke = "#00000000";
+      });
+
       const clicked = e.target.parentElement;
       const pageForLinkId = `#page-${clicked.id.split("ticket-")[1]}`;
       const pages = document.querySelectorAll(".page");
@@ -358,14 +353,43 @@ document.addEventListener("DOMContentLoaded", () => {
       clicked.classList.add("selected");
 
       for (page of pages) {
-        if (page.id === pageForLinkId) {
-          page.classList.add("main-selected");
-        } else {
-          page.classList.remove("main-selected");
-        }
+        page.classList.remove("main-selected");
       }
 
-      document.querySelector(`#page-${e.target.parentElement.id.split("ticket-")[1]}`).classList.add("main-selected");
+      const newSelectedPage = document.querySelector(`#page-${e.target.parentElement.id.split("ticket-")[1]}`);
+      newSelectedPage.classList.add("main-selected");
+
+      let prevColor = null;
+      newSelectedPage.querySelectorAll("div.box").forEach(d => {
+        let newColor = pickRandom(themeColors);
+        while (newColor == prevColor) {
+          newColor = pickRandom(themeColors);
+        }
+
+        d.style.backgroundColor = newColor;
+        prevColor = newColor;
+      });
+      
+
+      let hasScrolled = false;
+      
+
+      // Detect user scroll
+      newSelectedPage.addEventListener('scroll', function() {
+        hasScrolled = true;
+        document.querySelector('.scroll-indicator').querySelectorAll("path").forEach(p => p.style.stroke = "#00000000");
+      });
+
+      currentScrollerTimeout = setTimeout(function() {
+        let mainSelected = document.querySelector('.main-selected');
+        if (!hasScrolled && isScrollable(mainSelected)) {
+          scrollIndicator.querySelectorAll("path").forEach(p => {
+            p.style.transition = "1s";
+            p.style.stroke = "#000000FF";
+          });
+          scrollIndicator.addEventListener('click', scrollToNext);
+        }
+      }, 5000);
     });
   }
 
@@ -376,9 +400,39 @@ document.addEventListener("DOMContentLoaded", () => {
       e.target.closest(".full-card").classList.toggle("flipped");
     });
   }
+
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  const mainSelected = document.querySelector('.main-selected');
+
+  // Check if the content is scrollable
+  function isScrollable(element) {
+    return element.scrollHeight > element.clientHeight;
+  }
+
+  // Scroll the .main-selected div
+  function scrollToNext() {
+    const mainSelected = document.querySelector('.main-selected');
+    if (isScrollable(mainSelected)) {
+      mainSelected.scrollBy({ top: mainSelected.clientHeight / 2, behavior: 'smooth' });
+    }
+
+    document.querySelector('.scroll-indicator').querySelectorAll("path").forEach(p => p.style.stroke = "#00000000");
+  }
+
+  // Detect user scroll
+  mainSelected.addEventListener('scroll', function() {
+    hasScrolled = true;
+    document.querySelector('.scroll-indicator').querySelectorAll("path").forEach(p => p.style.stroke = "#00000000");
+  });
+
 });
 
 function secretEntrance() {
+  if (quickEntry) {
+    enter();
+    return;
+  }
+
   if (confirm(`You've discovered the secret entrance! Do you want to enter?`)) {
     enter();
   } else {
