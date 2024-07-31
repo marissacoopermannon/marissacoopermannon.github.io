@@ -8,7 +8,7 @@
 html, body {
   margin: 0 !important;
   padding: 0 !important;
-  height: 100dvh;
+  height: 100%;
 }
 
 h1, h2 {
@@ -28,7 +28,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100dvh;
+  height: 100lvh;
   z-index: 2;
   background: rgba(0, 0, 0, 1);
 }
@@ -38,7 +38,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100dvh;
+  height: 100svh;
   z-index: 3;
   background: #005A46;
   border: none;
