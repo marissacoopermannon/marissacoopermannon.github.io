@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const c = document.getElementById("myCanvas");
   const ctx = c.getContext("2d");
 
-  document.body.style.backgroundColor = "tan";
+  document.body.style.backgroundColor = "black";
   document.body.style.backgroundImage = "url(smallstars.gif)";
   document.body.style.backgroundSize = "500px";
   document.querySelector("#everything").style.display = "flex";
