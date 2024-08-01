@@ -5,14 +5,23 @@
   src: url("Bright Sunshine Demo.ttf");
 }
 
+@font-face {
+  font-family: "Boston Angel";
+  src: url("Assets/boston-angel-regular.ttf");
+}
+
 html, body {
   margin: 0 !important;
   padding: 0 !important;
-  height: 100dvh;
+  height: 100%;
 }
 
 h1, h2 {
-  font-family: "Bright Sunshine";
+  font-family: "Bright Sunshine", "cursive";
+}
+
+h2, h3 {
+  font-family: "Boston Angel", "serif";
 }
 
 * {
@@ -28,7 +37,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   z-index: 2;
   background: rgba(0, 0, 0, 1);
 }
@@ -38,7 +47,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   z-index: 3;
   background: #005A46;
   border: none;
@@ -105,7 +114,7 @@ button {
   margin: 0 auto;
   width: 100%;
   align-items: center;
-  height: 100dvh;
+  height: 100vh;
   justify-content: space-between;
 }
 
@@ -129,7 +138,7 @@ button {
   text-align: center;
 }
 
-.ticket-link img {
+.ticket-link img, .ticket-link svg {
   width: 50%;
   min-width: 80px;
   transition: 300ms;
@@ -232,7 +241,7 @@ button {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100dvh;
+  height: 100vh;
   width: 100vw;
 }
 
