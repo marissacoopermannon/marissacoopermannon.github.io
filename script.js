@@ -341,6 +341,11 @@ document.addEventListener("DOMContentLoaded", () => {
   startSpotlights(c, ctx);
 
   const ticketLinks = document.querySelectorAll(".ticket-link");
+  const detailsTicket = document.querySelector("#ticket-details");
+  detailsTicket.scrollIntoView({
+    block: "center",
+    inline: "center"
+  });
 
   for (tl of ticketLinks) {
     tl.addEventListener("click", e => {
@@ -363,6 +368,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       clicked.classList.add("selected");
+      clicked.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
+      });
 
       for (page of pages) {
         page.classList.remove("main-selected");
