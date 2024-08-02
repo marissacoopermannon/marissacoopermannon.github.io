@@ -1,5 +1,5 @@
 let sizingUp = false;
-let quickEntry = false;
+let quickEntry = true;
 
 const themeColors = [
   "#005A46",
@@ -263,11 +263,20 @@ const spotlights = [];
 let warmUpId = null;
 let spotlightsIntervalId = null;
 
+function setCanvasSize(c) {
+  const viewport = window.visualViewport;
+  const scale = viewport ? viewport.scale : 1;
+  const viewportWidth = viewport ? viewport.width * scale : window.innerWidth;
+  const viewportHeight = viewport ? viewport.height * scale : window.innerHeight;
+
+  c.width = viewportWidth;
+  c.height = viewportHeight;
+}
+
 function startSpotlights(c, ctx) {
   clearInterval(warmUpId);
   
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
+  setCanvasSize(c);
   
   const leftSpotlight = generateSpotlight(c, true);
   spotlights.push(leftSpotlight);
@@ -276,8 +285,7 @@ function startSpotlights(c, ctx) {
   spotlights.push(rightSpotlight);
 
   spotlightsIntervalId = setInterval(() => {
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
+    setCanvasSize(c);
     ctx.fillStyle = "rgba(0, 0, 0, .8)";
     ctx.fillRect(0, 0, c.width, c.height);
   
@@ -342,7 +350,11 @@ document.addEventListener("DOMContentLoaded", () => {
         p.style.stroke = "#00000000";
       });
 
-      const clicked = e.target.parentElement;
+      let clicked = e.target.parentElement;
+      while (clicked.tagName !== "DIV") {
+        clicked = clicked.parentElement;
+      }
+
       const pageForLinkId = `#page-${clicked.id.split("ticket-")[1]}`;
       const pages = document.querySelectorAll(".page");
 
@@ -356,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
         page.classList.remove("main-selected");
       }
 
-      const newSelectedPage = document.querySelector(`#page-${e.target.parentElement.id.split("ticket-")[1]}`);
+      const newSelectedPage = document.querySelector(`#page-${clicked.id.split("ticket-")[1]}`);
       newSelectedPage.classList.add("main-selected");
 
       let prevColor = null;
@@ -385,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!hasScrolled && isScrollable(mainSelected)) {
           scrollIndicator.querySelectorAll("path").forEach(p => {
             p.style.transition = "1s";
-            p.style.stroke = "#000000FF";
+            p.style.stroke = "#FFFFFFFF";
           });
           scrollIndicator.addEventListener('click', scrollToNext);
         }
@@ -414,6 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainSelected = document.querySelector('.main-selected');
     if (isScrollable(mainSelected)) {
       mainSelected.scrollBy({ top: mainSelected.clientHeight / 2, behavior: 'smooth' });
+      mainSelected.focus();
     }
 
     document.querySelector('.scroll-indicator').querySelectorAll("path").forEach(p => p.style.stroke = "#00000000");

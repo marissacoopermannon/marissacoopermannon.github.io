@@ -14,18 +14,44 @@ html, body {
   margin: 0 !important;
   padding: 0 !important;
   height: 100dvh;
+  width: 100%;
+  overflow: hidden;
 }
 
-h1, h2 {
+h1 {
   font-family: "Bright Sunshine", "cursive";
+  font-size: 3em;
+  margin-bottom: 10px;
 }
 
-h2, h3 {
+h2 {
   font-family: "Boston Angel", "serif";
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+h3 {
+  font-family: "Boston Angel", "serif";
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+h2 a {
+  font-family: "Boston Angel", "serif";
+}
+
+p {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+li {
+  font-size: 1.2em;
 }
 
 * {
   font-family: "Poppins";
+  color: white;
 }
 
 body {
@@ -122,7 +148,7 @@ button {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  margin-top: 10px;
+  height: 1dvh;
   max-width: 1600px;
 }
 
@@ -132,6 +158,8 @@ button {
   gap: 10px;
   margin-top: 10px;
   max-width: 1600px;
+  height: 16dvh;
+  margin-bottom: 10px;
 }
 
 .ticket-link {
@@ -139,7 +167,7 @@ button {
 }
 
 .ticket-link img, .ticket-link svg {
-  width: 50%;
+  height: 100%;
   min-width: 80px;
   transition: 300ms;
 }
@@ -203,6 +231,12 @@ button {
 .mid-container {
   overflow: hidden;
   text-align: center;
+  width: 99%;
+  height: 83dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .mid-container > .page {
@@ -210,10 +244,17 @@ button {
 }
 
 .mid-container > .page.main-selected {
-  width: 95%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   display: inline-block;
   overflow-y: scroll;
+}
+
+.mid-container > img.page.main-selected {
+  width: fit-content;
+  height: fit-content;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* width */
@@ -245,6 +286,15 @@ button {
   width: 100vw;
 }
 
+.big {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+}
+
 .full-card {
   display: inline-block;
   border: 2px solid black;
@@ -254,9 +304,23 @@ button {
   transform-style: preserve-3d;
   cursor: pointer;
   margin: 10px;
-  min-height: 120px;
-  min-width: 120px;
-  flex-grow: 1;
+  min-width: 300px;
+  min-height: 300px;
+}
+
+.big .full-card {
+  min-width: 500px;
+  height: 95%;
+}
+
+.big .full-card img {
+  border: 4px solid white;
+  box-shadow: 0px 0px 10px 5px white;
+}
+
+.big .full-card.flipped img {
+  border: 1px solid #DDDDDD;
+  box-shadow: 0px 0px 3px 3px #DDDDDD;
 }
 
 .full-card > div {
@@ -283,7 +347,6 @@ button {
 }
 
 .full-card img {
-  width: 100%;
   height: 100%;
 }
 
@@ -331,6 +394,11 @@ button {
   stroke: "#00000000";
 }
 
+.scroll-indicator {
+  position: absolute;
+  bottom: 17dvh;
+}
+
 .page div.box a {
   color: gold;
   text-decoration: underline;
@@ -338,4 +406,66 @@ button {
 
 #page-merch > div.box {
   padding: 15px;
+}
+
+.ticket-link path {
+  fill: white;
+  filter: drop-shadow(0px 0px 20px orange);
+  transition: 300ms;
+}
+
+.ticket-link svg {
+  transition: 300ms;
+}
+
+.ticket-link {
+  cursor: pointer;
+}
+
+#ticket-details.selected path {
+  fill: #01ffc8;
+  transition: 300ms;
+}
+
+#ticket-wedding-party.selected path {
+  fill: #ac6aa5;
+  transition: 300ms;  
+}
+
+#ticket-merch.selected path {
+  fill: #ff3f6c;
+  transition: 300ms;
+}
+
+#ticket-fun.selected path {
+  fill: #7993ff;
+  transition: 300ms;
+}
+
+#ticket-rsvp.selected path {
+  fill: #ffa449;
+  transition: 300ms;
+}
+
+.flexy-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  height: 100%;
+  align-content: stretch;
+}
+
+.flexy-container > div {
+  flex-grow: 1;
+  margin: 20px;
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  max-width: 800px;
+  padding: 10px;
 }
