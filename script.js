@@ -1,5 +1,5 @@
 let sizingUp = false;
-let quickEntry = true;
+let quickEntry = false;
 
 const themeColors = [
   "#005A46",
