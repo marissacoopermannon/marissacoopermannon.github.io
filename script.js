@@ -251,9 +251,9 @@ function moveSpotlight(c, spotty) {
   }
 
   if (sizingUp) {
-    spotty.size = spotty.size*1.007;
+    spotty.size = spotty.size*1.005;
     c.style.opacity = 1 - (spotty.size / 4000);
-    if (spotty.size > 3000) {
+    if (spotty.size > 2700) {
       endSpotlights();
     }
   }
@@ -314,7 +314,7 @@ function enter() {
   // endSpotlights();
 
   warmUpId = setInterval(() => {
-    alphaVal -= 0.005;
+    alphaVal -= 0.004;
     openingEl.style.opacity = alphaVal;
     overlay.style.background = `rgba(0, 0, 0, ${alphaVal})`;
     if (alphaVal <= 0) {
