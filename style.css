@@ -537,6 +537,12 @@ button {
   fill: white;
 }
 
+.opening-inner p {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 .enter-btn {
   margin: 10px;
   background: black;
@@ -544,5 +550,8 @@ button {
   padding: 10px;
   font-size: 1.4em;
   cursor: pointer;
-  border: #ffffff 2px solid; 
+  border: #ffffff 2px solid;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
