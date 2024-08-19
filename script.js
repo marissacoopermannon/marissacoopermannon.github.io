@@ -251,7 +251,7 @@ function moveSpotlight(c, spotty) {
   }
 
   if (sizingUp) {
-    spotty.size = spotty.size*1.004;
+    spotty.size = spotty.size*1.007;
     c.style.opacity = 1 - (spotty.size / 4000);
     if (spotty.size > 3000) {
       endSpotlights();
@@ -314,7 +314,7 @@ function enter() {
   // endSpotlights();
 
   warmUpId = setInterval(() => {
-    alphaVal -= 0.002;
+    alphaVal -= 0.005;
     openingEl.style.opacity = alphaVal;
     overlay.style.background = `rgba(0, 0, 0, ${alphaVal})`;
     if (alphaVal <= 0) {
@@ -451,14 +451,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function secretEntrance() {
-  if (quickEntry) {
-    enter();
-    return;
-  }
-
-  if (confirm(`You've discovered the secret entrance! Do you want to enter?`)) {
-    enter();
-  } else {
-    alert("okay");
-  }
+  enter();
 }
